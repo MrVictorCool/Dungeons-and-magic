@@ -42,11 +42,12 @@ func _physics_process(delta: float) -> void:
 		state = JUMP
 		
 	var direction := Input.get_axis("joy_left", "joy_right")
+	if abs(direction) >= .9: direction = abs(direction)/direction
 	
 	if Input.is_action_just_pressed("Shoot"):
 		if Input.is_action_pressed("joy_down"):
 			state = SHOOT
-			velocity.y = -175
+			velocity.y = -235
 			var fireball_ins = fireball.instantiate()
 			get_tree().current_scene.add_child(fireball_ins)
 			fireball_ins.global_position = global_position
